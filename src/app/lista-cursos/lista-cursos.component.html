@@ -1,0 +1,209 @@
+<ul ngbNav [(activeId)]="activeId" class="nav-tabs">
+    <li [ngbNavItem]="1">
+        <a ngbNavLink>Inicio</a>
+    </li>
+    <li [ngbNavItem]="2">
+        <a ngbNavLink>Cursos</a>
+    </li>
+</ul>
+
+
+<div *ngIf="activeId==1">
+    <mat-accordion hideToggle="true">
+        <ul id=cursos>
+            <li *ngFor="let item of cursos" id=curso_individual>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(item)}">
+                        <mat-panel-title>
+                            <strong>{{item.nombre}}</strong>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            promedio hasta ahora {{(item.nota1*item.porcentaje1 + item.nota2*item.porcentaje2 + item.nota3*item.porcentaje3 + item.nota4*item.porcentaje4 + item.nota5*item.porcentaje5)}}
+                            <mat-icon *ngIf="getCara(item)">sentiment_very_satisfied</mat-icon>
+                            <mat-icon *ngIf="!getCara(item)">sentiment_very_dissatisfied</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <form [formGroup]="formulario2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="col-10">
+                                    <input type="text" formControlName="nombre" placeholder="{{item.nombre}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nota 1</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="nota1" placeholder="{{item.nota1}}" [style.width.%]="100">
+                                </div>
+                                <div class="col-2">
+                                    <label>Porcentaje</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="porcentaje1" placeholder="{{item.porcentaje1}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nota 2</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="nota2" placeholder="{{item.nota2}}" [style.width.%]="100">
+                                </div>
+                                <div class="col-2">
+                                    <label>Porcentaje</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="porcentaje2" placeholder="{{item.porcentaje2}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nota 3</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="nota3" placeholder="{{item.nota3}}" [style.width.%]="100">
+                                </div>
+                                <div class="col-2">
+                                    <label>Porcentaje</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="porcentaje3" placeholder="{{item.porcentaje3}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nota 4</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="nota4" placeholder="{{item.nota4}}" [style.width.%]="100">
+                                </div>
+                                <div class="col-2">
+                                    <label>Porcentaje</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="porcentaje4" placeholder="{{item.porcentaje4}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Nota 5</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="nota5" placeholder="{{item.nota5}}" [style.width.%]="100">
+                                </div>
+                                <div class="col-2">
+                                    <label>Porcentaje</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" formControlName="porcentaje5" placeholder="{{item.porcentaje5}}" [style.width.%]="100">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <mat-action-row>
+                        <button (click)="actualizar(item)" mat-button>Guardar Cambios</button>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </li>
+        </ul>
+    </mat-accordion>
+
+
+
+</div>
+
+<div *ngIf="activeId==2">
+    <h2>Crear Curso</h2>
+    <form [formGroup]="formulario" (ngSubmit)="validacion()">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <label>Nombre</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" formControlName="nombre" placeholder="Química" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Nota 1</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="nota1" placeholder="70" [style.width.%]="100">
+                </div>
+                <div class="col-2">
+                    <label>Porcentaje</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="porcentaje1" placeholder="0.2" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Nota 2</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="nota2" placeholder="70" [style.width.%]="100">
+                </div>
+                <div class="col-2">
+                    <label>Porcentaje</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="porcentaje2" placeholder="0.2" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Nota 3</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="nota3" placeholder="70" [style.width.%]="100">
+                </div>
+                <div class="col-2">
+                    <label>Porcentaje</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="porcentaje3" placeholder="0.2" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Nota 4</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="nota4" placeholder="70" [style.width.%]="100">
+                </div>
+                <div class="col-2">
+                    <label>Porcentaje</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="porcentaje4" placeholder="0.2" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Nota 5</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="nota5" placeholder="70" [style.width.%]="100">
+                </div>
+                <div class="col-2">
+                    <label>Porcentaje</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" formControlName="porcentaje5" placeholder="0.2" [style.width.%]="100">
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" [disabled]="formulario.invalid" style="margin-left: 100px; margin-right: 100px;">Crear</button>
+                <button type="button" style="margin-left: 100px;">Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+</div>
